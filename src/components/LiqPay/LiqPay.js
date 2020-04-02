@@ -22,7 +22,8 @@ const LiqPay = ({
     public_key: publicKey,
     currency: currency,
     description: service_description,
-    order_id: orderId
+    order_id: orderId,
+    verifycode: ""
   };
 
   const data = base64_encode(JSON.stringify(json_srtring));
