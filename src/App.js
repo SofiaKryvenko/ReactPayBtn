@@ -20,6 +20,7 @@ class App extends Component {
           currency="UAH"
           orderId={Math.floor(1 + Math.random() * 900000000)}
           service_description="Medical support"
+          result_url="http://localhost:3000/"
           // server_url="http://localhost:3000"
           // title="те що відображатиметься в назві кнопки"
         />

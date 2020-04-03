@@ -13,7 +13,8 @@ const LiqPay = ({
   service_description,
   currency = "UAH",
   title = "Payment",
-  orderId = Math.floor(1 + Math.random() * 900000000)
+  orderId = Math.floor(1 + Math.random() * 900000000),
+  ...props
 }) => {
   const json_srtring = {
     version: "3",
@@ -23,7 +24,7 @@ const LiqPay = ({
     currency: currency,
     description: service_description,
     order_id: orderId,
-    verifycode: ""
+    ...props
   };
 
   const data = base64_encode(JSON.stringify(json_srtring));
