@@ -19,9 +19,9 @@ class App extends Component {
           amount="1"
           currency="UAH"
           orderId={Math.floor(1 + Math.random() * 900000000)}
+          title="Payment"
           service_description="Medical support"
-          // server_url="http://localhost:3000"
-          // title="те що відображатиметься в назві кнопки"
+          server_url="https://portal-doctor.eleks.com/api/ProcessAnonymousPost/detelemedicine/liqpay"
         />
       </div>
     );

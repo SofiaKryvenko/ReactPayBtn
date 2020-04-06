@@ -2,7 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import crypto from "crypto";
 
-const base64_encode = str => window.btoa(unescape(encodeURIComponent(str)));
+const sha1 = crypto.createHash("sha1");
+
+const base64_encode = (str) => window.btoa(unescape(encodeURIComponent(str)));
+const b64_to_utf8 = (str) => decodeURIComponent(escape(window.atob(str)));
 
 //orderId - Унікальний ID покупки у Вашому магазині. Максимальна довжина 255 символів.
 
@@ -12,8 +15,9 @@ const LiqPay = ({
   amount,
   service_description,
   currency = "UAH",
-  title = "Payment",
-  orderId = Math.floor(1 + Math.random() * 900000000)
+  title,
+  orderId,
+  server_url,
 }) => {
   const json_srtring = {
     version: "3",
@@ -23,13 +27,12 @@ const LiqPay = ({
     currency: currency,
     description: service_description,
     order_id: orderId,
-    verifycode: ""
+    server_url,
   };
-
   const data = base64_encode(JSON.stringify(json_srtring));
+
   //creating signature
-  const signature = crypto
-    .createHash("sha1")
+  const signature = sha1
     .update(privateKey + data + privateKey)
     .digest("base64");
 
@@ -62,7 +65,8 @@ LiqPay.propTypes = {
   amount: PropTypes.string.isRequired,
   service_description: PropTypes.string.isRequired,
   orderId: PropTypes.any.isRequired,
-  title: PropTypes.string
+  title: PropTypes.string,
+  server_url: PropTypes.string,
 };
 
 export default LiqPay;
